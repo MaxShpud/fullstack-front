@@ -39,7 +39,7 @@ export default function AddTask() {
                     <input 
                     type={"text"} 
                     className="form-control"
-                    placeholder="Enter the name of who the task belongs to"
+                    placeholder="Enter the name of who the task belongs to "
                     name="name"
                     value={name}
                     onChange={(e)=>onInputChange(e)}/>
