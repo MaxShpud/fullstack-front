@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, {useState} from 'react'
 import { Link,useNavigate } from 'react-router-dom';
+import { ADRESS } from '../consts';
 
 export default function AddTask() {
 
@@ -14,14 +15,14 @@ export default function AddTask() {
 
         const {name,task,email}=user;
 
-        const onInputChange=(e)=>{
+        const onInputChange=(event)=>{
 
-            setTask({...user,[e.target.name]:e.target.value});
+            setTask({...user,[event.target.name]:event.target.value});
         };
 
-        const onSubmit=async(e)=>{
-            e.preventDefault();
-            await axios.post("http://localhost:8080/user",user);
+        const onSubmit=async(event)=>{
+            event.preventDefault();
+            await axios.post("http://localhost:8080/user", user);
             navigate("/");
         };
 
@@ -31,7 +32,7 @@ export default function AddTask() {
             <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
                 <h2 className="text-center m-4">New task</h2>
 
-                <form onSubmit={(e) => onSubmit(e)}>
+                <form onSubmit={(event) => onSubmit(event)}>
                 <div className="mb-3">
                     <laber htmlFor="Name" className="form-label">
                         Name
@@ -42,7 +43,7 @@ export default function AddTask() {
                     placeholder="Enter the name of who the task belongs to "
                     name="name"
                     value={name}
-                    onChange={(e)=>onInputChange(e)}/>
+                    onChange={(event)=>onInputChange(event)}/>
                 </div>
                 <div className="mb-3">
                     <laber htmlFor="Task" className="form-label">
@@ -54,7 +55,7 @@ export default function AddTask() {
                     placeholder="Enter the task"
                     name="task"
                     value={task}
-                    onChange={(e)=>onInputChange(e)}/>
+                    onChange={(event)=>onInputChange(event)}/>
                 </div>
                 <div className="mb-3">
                     <laber htmlFor="Email" className="form-label">
@@ -63,10 +64,12 @@ export default function AddTask() {
                     <input 
                     type={"text"} 
                     className="form-control"
+
+                    
                     placeholder="Enter your e-mail address"
                     name="email"
                     value={email}
-                    onChange={(e)=>onInputChange(e)}/>
+                    onChange={(event)=>onInputChange(event)}/>
                 </div>
                 <button type="submit" className="btn btn-outline-primary">
                     Submit
