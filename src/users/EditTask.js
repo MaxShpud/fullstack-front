@@ -16,17 +16,18 @@ export default function EditTask() {
 
         const {name,task,email}=user;
 
-        const onInputChange=(e)=>{
+        const onInputChange=(event)=>{
 
-            setTask({...user,[e.target.name]:e.target.value});
+            setTask({...user,[event.target.name]:event.target.value});
         };
 
         useEffect(()=>{
             loadTask();
         },[]);
 
-        const onSubmit = async (e) => {
-            e.preventDefault();
+        const onSubmit = async (event) => {
+            event.preventDefault();
+            console.log(process.env.ADRESS);
             await axios.put(`http://localhost:8080/user/${id}`, user);
             navigate("/");
           };
@@ -42,7 +43,7 @@ export default function EditTask() {
             <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
                 <h2 className="text-center m-4">Edit Task</h2>
 
-                <form onSubmit={(e) => onSubmit(e)}>
+                <form onSubmit={(event) => onSubmit(event)}>
                 <div className="mb-3">
                     <laber htmlFor="Name" className="form-label">
                         Name
@@ -53,7 +54,7 @@ export default function EditTask() {
                     placeholder="Enter the name of who the task belongs to"
                     name="name"
                     value={name}
-                    onChange={(e)=>onInputChange(e)}/>
+                    onChange={(event)=>onInputChange(event)}/>
                 </div>
                 <div className="mb-3">
                     <laber htmlFor="Task" className="form-label">
@@ -65,7 +66,7 @@ export default function EditTask() {
                     placeholder="Enter the task"
                     name="task"
                     value={task}
-                    onChange={(e)=>onInputChange(e)}/>
+                    onChange={(event)=>onInputChange(event)}/>
                 </div>
                 <div className="mb-3">
                     <laber htmlFor="Email" className="form-label">
@@ -77,7 +78,7 @@ export default function EditTask() {
                     placeholder="Enter your e-mail address"
                     name="email"
                     value={email}
-                    onChange={(e)=>onInputChange(e)}/>
+                    onChange={(event)=>onInputChange(event)}/>
                 </div>
                 <button type="submit" className="btn btn-outline-primary">
                     Submit
