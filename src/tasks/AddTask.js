@@ -1,28 +1,29 @@
 import axios from 'axios';
 import React, {useState} from 'react'
 import { Link,useNavigate } from 'react-router-dom';
-import { ADRESS } from '../consts';
 
 export default function AddTask() {
 
-        let navigate = useNavigate()
 
-        const [user,setTask]=useState({
-            name:"",
+        let navigate = useNavigate();
+
+        const [MainTask,setTask]=useState({
             task:"",
-            email:""
+            deadline:"",
+            progress:""
         })
 
-        const {name,task,email}=user;
+        const {task,deadline,progress}=MainTask;
 
         const onInputChange=(event)=>{
 
-            setTask({...user,[event.target.name]:event.target.value});
+            setTask({...MainTask,[event.target.name]:event.target.value});
         };
 
         const onSubmit=async(event)=>{
             event.preventDefault();
-            await axios.post("http://localhost:8080/user", user);
+            await axios.post(`http://localhost:8080/task`, MainTask);
+            //http://localhost:8080/user
             navigate("/");
         };
 
@@ -33,18 +34,6 @@ export default function AddTask() {
                 <h2 className="text-center m-4">New task</h2>
 
                 <form onSubmit={(event) => onSubmit(event)}>
-                <div className="mb-3">
-                    <laber htmlFor="Name" className="form-label">
-                        Name
-                    </laber>
-                    <input 
-                    type={"text"} 
-                    className="form-control"
-                    placeholder="Enter the name of who the task belongs to "
-                    name="name"
-                    value={name}
-                    onChange={(event)=>onInputChange(event)}/>
-                </div>
                 <div className="mb-3">
                     <laber htmlFor="Task" className="form-label">
                         Task
@@ -58,17 +47,27 @@ export default function AddTask() {
                     onChange={(event)=>onInputChange(event)}/>
                 </div>
                 <div className="mb-3">
-                    <laber htmlFor="Email" className="form-label">
-                        E-mail
+                    <laber htmlFor="Deadline" className="form-label">
+                        Deadline
                     </laber>
                     <input 
                     type={"text"} 
                     className="form-control"
-
-                    
-                    placeholder="Enter your e-mail address"
-                    name="email"
-                    value={email}
+                    placeholder="Enter the deadline by which you plan to complete the task"
+                    name="deadline"
+                    value={deadline}
+                    onChange={(event)=>onInputChange(event)}/>
+                </div>
+                <div className="mb-3">
+                    <laber htmlFor="Progress" className="form-label">
+                        Progress
+                    </laber>
+                    <input 
+                    type={"text"} 
+                    className="form-control"
+                    placeholder="Enter progress of the completed task"
+                    name="progress"
+                    value={progress}
                     onChange={(event)=>onInputChange(event)}/>
                 </div>
                 <button type="submit" className="btn btn-outline-primary">

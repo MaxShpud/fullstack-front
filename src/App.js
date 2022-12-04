@@ -3,9 +3,9 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import Navbar from './layout/Navbar';
 import Home from './pages/Home';
 import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
-import AddTask from './users/AddTask';
-import EditTask from './users/EditTask';
-import ViewTask from "./users/ViewTask";
+import AddTask from './tasks/AddTask';
+import EditTask from './tasks/EditTask';
+import ViewTask from "./tasks/ViewTask";
 
 function App() {
   return (

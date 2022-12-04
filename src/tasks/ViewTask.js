@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 export default function ViewTask() {
-    const [user, setTask] = useState({
-      name: "",
+    const [mainTask, setTask] = useState({
       task: "",
-      email: "",
+      deadline: "",
+      progress: "",
     });
   
     const { id } = useParams();
@@ -16,7 +16,7 @@ export default function ViewTask() {
     }, []);
   
     const loadTask = async () => {
-      const result = await axios.get(`http://localhost:8080/user/${id}`);
+      const result = await axios.get(`http://localhost:8080/task/${id}`);
       setTask(result.data);
     };
   
@@ -28,19 +28,19 @@ export default function ViewTask() {
   
             <div className="card">
               <div className="card-header">
-                Details of task number : {user.id}
+                Details of task number : {mainTask.id}
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item">
-                    <b>Name: </b>
-                    {user.name}
-                  </li>
-                  <li className="list-group-item">
                     <b>Task: </b>
-                    {user.task}
+                    {mainTask.task}
                   </li>
                   <li className="list-group-item">
-                    <b>Email: </b>
-                    {user.email}
+                    <b>Deadline: </b>
+                    {mainTask.deadline}
+                  </li>
+                  <li className="list-group-item">
+                    <b>Progress: </b>
+                    {mainTask.progress}
                   </li>
                 </ul>
               </div>
